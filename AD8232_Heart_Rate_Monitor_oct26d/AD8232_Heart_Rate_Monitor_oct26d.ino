@@ -14,7 +14,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  unsigned long startTime = micros();
   if((digitalRead(10) == 1) || (digitalRead(11) == 1)){
     Serial.println("!");
   }
@@ -24,4 +24,6 @@ void loop() {
   }
   //wait for a bit to keep serial data form saturating
   delay(1);
+  unsigned long endTime = micros();
+  Serial.println(endTime - startTime);
 }
