@@ -3,7 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from scipy import signal
 
-df = pd.read_csv("Ardu_heart.csv",header=None)
+filename = input("filename.csv->")
+df = pd.read_csv(filename,header=None)
 df = df.iloc[:,0]
 
 #sample_freq = int(int(1.0/(6204)*(10**6)) / 2) * 2
