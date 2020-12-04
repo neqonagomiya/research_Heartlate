@@ -9,7 +9,7 @@ srl_Heartrate = serial.Serial(port,rate)
 #srl_Heartrate.open()
 #filename = input("Ardu_heartN.csv->")
 
-myfile = open("Ardu_heart4.csv","w")
+myfile = open("Ardu_heart5.csv","w")
 '''
 while(1):
         val = srl_Heartrate.readline()

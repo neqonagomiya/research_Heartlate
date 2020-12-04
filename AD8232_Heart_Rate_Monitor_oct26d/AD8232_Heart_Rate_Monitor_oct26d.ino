@@ -24,6 +24,6 @@ void loop() {
   }
   //wait for a bit to keep serial data form saturating
   delay(1);
-  unsigned long endTime = micros();
-  Serial.println(endTime - startTime);
+  //unsigned long endTime = micros();
+  //Serial.println(endTime - startTime);
 }
