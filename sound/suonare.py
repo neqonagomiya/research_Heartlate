@@ -32,7 +32,16 @@ def find_rubix22(devices):
 #    for i in range(len(devices)):
 
 #this function check if the audio_device to be used can be input
-#def device_can_input(devices,use_audio_device_index):
+#if audio_device you used can be inputed , return audio_device index(int)
+def check_inputtable_device(devices,use_audio_device_index):
+    check_inputtable_device_index = devices[use_audio_device_index]["maxInputChannels"]
+    if check_inputtable_device_index == 0:
+        #print("you cant use this audio_device")
+        return None
+    else:
+        #print("OK")
+        return check_inputtable_device_index
+
 
 
 #this function is to add datetime to filename
