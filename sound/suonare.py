@@ -1,5 +1,6 @@
 import pyaudio
 import serial
+import datetime
 
 #py_audio is pyaudio class (ex. py_audio=pyaudio.PyAudio())
 #this function is listing up audio devices
@@ -17,6 +18,7 @@ def display_audio_devices(devices):
     for index,audio_name in enumerate(devices):
         print(index,audio_name["name"])
 
+#this function is find rubix22's index
 def find_rubix22(devices):
     for i in range(len(devices)):
         if devices[i]["name"] == "Rubix22":
@@ -25,7 +27,20 @@ def find_rubix22(devices):
             continue
     return rubix22_index
 
+#this function is finding audio_device's index you want
 #def find_audio_device(devices):
 #    for i in range(len(devices)):
+
+#this function check if the audio_device to be used can be input
 #def device_can_input(devices,use_audio_device_index):
-    
+
+
+#this function is to add datetime to filename
+#ex.
+#file_name = input("not input extension. like .wav >> ")
+#file_name = input("please only input file name >> ")
+#date_file_name = add_datetime(file_name)
+def add_datetime(file_name):
+    now = datetime.datetime.now()
+    date_file_name = file_name + now.strftime("%Y%m%d_%H%M%S") + ".wav"
+    return date_file_name
