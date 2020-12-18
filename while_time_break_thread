@@ -1,0 +1,17 @@
+import time 
+from threading import Thread
+
+cond = True
+
+def func():
+    global cond
+    time.sleep(1)
+    cond = False
+
+
+thread = Thread(target=func)
+thread.start()
+
+while cond:
+    print("processing!!")
+    time.sleep(0.2)
