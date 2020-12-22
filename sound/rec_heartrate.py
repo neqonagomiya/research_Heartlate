@@ -78,3 +78,12 @@ sound_file_name = input("ファイルの名前は? >> ")
 sound_file_name_date = suonare.add_datetime(sound_file_name)
 
 
+
+
+
+
+
+
+
+
+
