@@ -10,6 +10,8 @@ import sys
 py_audio = pyaudio.PyAudio()
 devices = suonare.list_audio_devices(py_audio)
 
+#select audio_deveice
+
 if len(devices)==0:
     #not found audio devices
     print("error:device not found")
@@ -33,10 +35,46 @@ else:
         check_device_flag = suonare.check_inputtable_device(devices,use_audio_device_index)
         if check_device_flag is None:
             print("you CANT use this audio_device")
+            print("またね!")
             sys.exit()
         else:
             print("OK!") 
     else:
-        print("プログラムを終了します")
+        print("またね!")
         sys.exit()
+
+
+#recoding 
+CHUNK          = 1024
+FORMAT         = pyaudio.paInt16
+CHANNELS       = int(input("MONO: 1, STEREO: 2 >> "))
+SAMPLERATE     = 48000 
+RECORD_SECONDS = int(input("何秒間録音する？ >> "))
+
+frames = []
+
+stream = py_audio.open(format=FORMAT,
+                       channels=CHANNELS,
+                       rate=SAMPLERATE,
+                       input=True,
+                       frames_per_buffer=CHUNK,
+                       input_device_index=use_audio_device_index)
+
+print('Now recoding')
+
+for i in range(0, int(SAMPLERATE/CHUNK * RECORD_SECONDS)):
+    frame = stream.read(CHUNK)
+    frames.append(frame)
+
+print('Done recoding !')
+
+#End stream
+stream.stop_stream()
+stream.close()
+py_audio.terminate()
+
+#save .wav
+sound_file_name = input("ファイルの名前は? >> ")
+sound_file_name_date = suonare.add_datetime(sound_file_name)
+
 

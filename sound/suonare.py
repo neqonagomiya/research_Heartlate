@@ -1,6 +1,7 @@
 import pyaudio
 import serial
 import datetime
+import wave
 
 #py_audio is pyaudio class (ex. py_audio=pyaudio.PyAudio())
 #this function is listing up audio devices
@@ -53,3 +54,11 @@ def add_datetime(file_name):
     now = datetime.datetime.now()
     date_file_name = file_name + now.strftime("%Y%m%d_%H%M%S") + ".wav"
     return date_file_name
+
+def make_wav_file(py_audio,sound_file_name_date,CHANNELS,FORMAT,SAMPLERATE,frames):
+    wf = wave.open(sound_file_name_date, 'wb')
+    wf.setnchannels(CHANNELS)
+    wf.setsampwidth(py_audio.get_sample_size(FORMAT))
+    wf.setframerate(SAMPLERATE)
+    wf.writeframes(b''.join(frames))
+    wf.close()
