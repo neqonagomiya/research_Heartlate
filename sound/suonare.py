@@ -3,6 +3,7 @@ import serial
 import datetime
 import wave
 
+# About Audio_Devices
 #py_audio is pyaudio class (ex. py_audio=pyaudio.PyAudio())
 #this function is listing up audio devices
 #returned devices is list
@@ -44,7 +45,7 @@ def check_inputtable_device(devices,use_audio_device_index):
         return check_inputtable_device_index
 
 
-
+#Setting Filename
 #this function is to add datetime to filename
 #ex.
 #file_name = input("not input extension. like .wav >> ")
@@ -52,9 +53,35 @@ def check_inputtable_device(devices,use_audio_device_index):
 #date_file_name = add_datetime(file_name)
 def add_datetime(file_name):
     now = datetime.datetime.now()
-    date_file_name = file_name + now.strftime("%Y%m%d_%H%M%S") + ".wav"
+    date_file_name = file_name + now.strftime("%Y%m%d_%H%M%S")
     return date_file_name
 
+def add_L(date_file_name):
+    date_file_name_L = date_file_name + "L"
+    return date_file_name_L
+
+def add_R(date_file_name):
+    date_file_name_R = date_file_name + "R"
+    return date_file_name_R
+
+def add_wav(date_file_name):
+    date_file_name_wav = date_file_name + ".wav"
+    return date_file_name_wav
+
+def add_datetime_L_wav(sound_file_name):
+    sound_file_name_date = add_datetime(sound_file_name)
+    sound_file_name_date_L = add_L(sound_file_name_date)
+    sound_file_name_date_L_wav = add_wav(sound_file_name_date_L)
+    return sound_file_name_date_L_wav
+
+def add_datetime_R_wav(sound_file_name):
+    sound_file_name_date = add_datetime(sound_file_name)
+    sound_file_name_date_R = add_R(sound_file_name_date)
+    sound_file_name_date_R_wav = add_wav(sound_file_name_date_R)
+    return sound_file_name_date_R_wav
+
+
+#Recoding
 def make_wav_file(py_audio,sound_file_name_date,CHANNELS,FORMAT,SAMPLERATE,frames):
     wf = wave.open(sound_file_name_date, 'wb')
     wf.setnchannels(CHANNELS)
@@ -62,3 +89,6 @@ def make_wav_file(py_audio,sound_file_name_date,CHANNELS,FORMAT,SAMPLERATE,frame
     wf.setframerate(SAMPLERATE)
     wf.writeframes(b''.join(frames))
     wf.close()
+
+
+#def separate_LR(frames):
