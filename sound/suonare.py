@@ -1,5 +1,4 @@
 import pyaudio
-import serial
 import datetime
 import wave
 

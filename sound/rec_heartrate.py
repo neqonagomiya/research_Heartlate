@@ -58,6 +58,11 @@ print("CHANNELS "+str(CHANNELS)+" "+str(type(CHANNELS)))
 frames = []
 
 if input("Are you Ready ?") == "":
+
+    #define callback
+    #def callback(in_data,frame_count,time_info,status):
+    #    return 
+
     stream = py_audio.open(format=FORMAT,
                            channels=CHANNELS,
                            rate=SAMPLERATE,
@@ -67,12 +72,15 @@ if input("Are you Ready ?") == "":
 
     print('Now recoding')
 
+    """
+    #blocking rec
     for i in range(0, int(SAMPLERATE/CHUNK * RECORD_SECONDS)):
         frame = stream.read(CHUNK)
         frames.append(frame)
+    """
 
     print('Done recoding !')
-    print(type(frame))
+    #print(type(frame))
     #End stream
     stream.stop_stream()
     stream.close()
@@ -110,7 +118,7 @@ elif CHANNELS == 2:
     frames_L = frames[0::2]
     suonare.make_wav_file(py_audio,
                           sound_file_name_date_L_wav,
-                          1,
+                          CHANNELS,
                           FORMAT,
                           SAMPLERATE,
                           frames_L)
@@ -122,7 +130,7 @@ elif CHANNELS == 2:
     frames_R = frames[1::2]
     suonare.make_wav_file(py_audio,
                           sound_file_name_date_R_wav,
-                          1,
+                          CHANNELS,
                           FORMAT,
                           SAMPLERATE,
                           frames_R)
