@@ -5,7 +5,8 @@ import sys
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-import threading
+import datetime
+import os
 
 #py_audio is pyaudio class (ex. py_audio=pyaudio.PyAudio())
 py_audio = pyaudio.PyAudio()
@@ -86,15 +87,8 @@ if input("Are you Ready ?") == "":
     # start the stream 
     stream.start_stream()
 
-
     # wait for stream to finish 
-    time.sleep(RECORD_SECONDS)
-
-    thread_list = threading.enumerate()
-    thread_list.remove(threading.main_thread())
-    print(len(thread_list))
-    for thread in thread_list:
-        thread.join( )
+    time.sleep(RECORD_SECONDS+1)
 
     # stop stream 
     stream.stop_stream()
@@ -105,9 +99,17 @@ if input("Are you Ready ?") == "":
     py_audio.terminate()
 
     #save wav
+    now = datetime.datetime.now()
     sound_file_name = "Callback_"
-    sound_file_name_date_wav = suonare.add_wav(suonare.add_datetime(sound_file_name))
-    print(sound_file_name_date_wav)
+    ##make directory
+    dir_name_date = sound_file_name + now.strftime("%Y%m%d_%H%M%S")
+    print("dir_name_date:"+ dir_name_date)
+    os.mkdir(dir_name_date)
+
+    ##setting wav
+    sound_file_name_date_wav = sound_file_name + now.strftime("%Y%m%d_%H%M%S")
+    print("sound_file_name_date_wav:"+sound_file_name_date_wav)
+
     suonare.make_wav_file(py_audio,
                           sound_file_name_date_wav,
                           CHANNELS,
@@ -119,56 +121,3 @@ if input("Are you Ready ?") == "":
 else:
     print("またね！")
     sys.exit()
-
-"""
-#plot
-#wf = wave.open(sound_file_name_date,"rb")
-#print('ch:', wf.getnchannels())
-#print('sample_width:', wf.getsampwidth())
-#print('sample_rate:', wf.getframerate())
-#print('frame:', wf.getnframes())
-#print('param:', wf.getparams())
-
-wf.rewind()
-buf = wf.readframes(-1)
-
-if wf.getsampwidth() == 2:
-    data = np.frombuffer(buf, dtype='int16')
-elif wf.getsampwidth() == 4:
-    data = np.frombuffer(buf, dtype='int32')
-else:
-    print('Not support')
-    sys.exit()
-
-if wf.getnchannels() == 2:
-    data_L = data[::2]
-    data_R = data[1::2]
-    plt.subplot(211)
-    plt.plot(data_L)
-    plt.subplot(212)
-    plt.plot(data_R)
-    plt.show()
-else:
-    plt.plot(data)
-    plt.show()
-"""
-
-print("frames:",str(type(frames)))
-frames_bin = b"".join(frames)
-print("frames_bin:",str(type(frames_bin)))
-frames_nparray = np.frombuffer(frames_bin,dtype='int16')
-
-if CHANNELS == 2:
-    frames_nparray_L = frames_nparray[::2]
-    frames_nparray_R = frames_nparray[1::2]
-    plt.subplot(211)
-    plt.plot(frames_nparray_L)
-    plt.subplot(212)
-    plt.plot(frames_nparray_R)
-    plt.show()
-else:
-    plt.plot(frames_nparray)
-    plt.show()
-
-
-print("お疲れ様！")
