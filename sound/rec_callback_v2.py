@@ -128,3 +128,24 @@ if input("Are you Ready ?") == "":
 else:
     print("またね！")
     sys.exit()
+
+
+print("frames:",str(type(frames)))
+frames_bin = b"".join(frames)
+print("frames_bin:",str(type(frames_bin)))
+frames_nparray = np.frombuffer(frames_bin,dtype='int16')
+
+if CHANNELS == 2:
+    frames_nparray_L = frames_nparray[::2]
+    frames_nparray_R = frames_nparray[1::2]
+    plt.subplot(211)
+    plt.plot(frames_nparray_L)
+    plt.subplot(212)
+    plt.plot(frames_nparray_R)
+    plt.show()
+else:
+    plt.plot(frames_nparray)
+    plt.show()
+
+
+print("お疲れ様！")
