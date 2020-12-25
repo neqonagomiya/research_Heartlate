@@ -12,8 +12,19 @@ import os
 py_audio = pyaudio.PyAudio()
 devices = suonare.list_audio_devices(py_audio)
 
-#select audio_deveice
+#setting directory and .wav
+now = datetime.datetime.now()
+sound_file_name = "heartrate_"
+#directory name 
+dir_name_date = sound_file_name + now.strftime("%Y%m%d_%H%M%S")
+#.wav name
+sound_file_name_date_wav = sound_file_name + now.strftime("%Y%m%d_%H%M%S") + ".wav"
+# current directory
+path = os.getcwd()
+#address name to save .wav
+save_wav_address = path + "/" + dir_name_date + "/"
 
+#select audio_deveice
 if len(devices)==0:
     #not found audio devices
     print("error:device not found")
@@ -99,19 +110,15 @@ if input("Are you Ready ?") == "":
     py_audio.terminate()
 
     #save wav
-    now = datetime.datetime.now()
-    sound_file_name = "Callback_"
     ##make directory
-    dir_name_date = sound_file_name + now.strftime("%Y%m%d_%H%M%S")
     print("dir_name_date:"+ dir_name_date)
     os.mkdir(dir_name_date)
 
-    ##setting wav
-    sound_file_name_date_wav = sound_file_name + now.strftime("%Y%m%d_%H%M%S")
+    ##save wav
     print("sound_file_name_date_wav:"+sound_file_name_date_wav)
 
     suonare.make_wav_file(py_audio,
-                          sound_file_name_date_wav,
+                          save_wav_address+sound_file_name_date_wav,
                           CHANNELS,
                           FORMAT,
                           SAMPLERATE,
