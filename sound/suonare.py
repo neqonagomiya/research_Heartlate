@@ -1,6 +1,7 @@
 import pyaudio
 import datetime
 import wave
+import numpy as np
 
 # About Audio_Devices
 #py_audio is pyaudio class (ex. py_audio=pyaudio.PyAudio())
@@ -90,4 +91,3 @@ def make_wav_file(py_audio,sound_file_name_date,CHANNELS,FORMAT,SAMPLERATE,frame
     wf.close()
 
 
-#def separate_LR(frames):
