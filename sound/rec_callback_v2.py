@@ -102,6 +102,14 @@ frames = []
 ##wf.setframerate(SAMPLERATE)
 ##wf.setnchannels(CHANNELS)
 
+#frames is original data
+#frames_bin is data that summarizes frames
+#frames_L is deta obtained by decomposing frames. frames_L is used to make a .wav file
+#frames_R is data obtained by decomposing frames. frames_R is used to make a .wav file
+#frames_nparray is the value obtained by changing frames to a numerical value.　frames_nparray　is used when plotting the original data on the graph.
+#frames_nparray_L is deta obtained by decomposing frames. frames_nparray_L is used when plotting the L_data on the graph.
+#frames_nparray_R is deta obtained by decomposing frames. frames_nparray_R is used when plotting the R_data on the graph.
+
 if input("Are you Ready ?") == "":
     print("Now recording")
     #define callback
@@ -162,14 +170,24 @@ else:
 print("frames info:")
 print("frames:",str(type(frames)))
 frames_bin = b"".join(frames)
+#print("frames_bin:",frames)
 print("frames_bin:",str(type(frames_bin)))
 frames_L = frames[::2]
+print("frames_L", len(frames_L))
 frames_R = frames[1::2]
+print("frames_R", len(frames_R))
+#frames_L = suonare.bytes_L_select(frames)
+#frames_R = suonare.bytes_R_select(frames)
+#print("frames_L:", frames_L)
+#print("frames_R:", frames_R)
 frames_nparray = np.frombuffer(frames_bin,dtype='int16')
 print("frames_nparray:",str(type(frames_nparray)))
 print(frames_nparray)
+print("len(frames_nparray):", len(frames_nparray))
 print(type(frames_nparray[0]))
 
+t = np.arange(0, (len(frames_nparray)/CHANNELS/SAMPLERATE),(1/SAMPLERATE))
+print("time",(len(frames_nparray)/CHANNELS/SAMPLERATE))
 ###################################################################################################
 # Plot figure and Save signal_data
 ###################################################################################################
@@ -181,21 +199,45 @@ if CHANNELS == 2:
     np.savetxt(save_address+"original_signal_data.csv",frames_nparray,fmt="%d",delimiter=",")
     np.savetxt(save_address+"L_signal_data.csv", frames_nparray_L, fmt="%d",delimiter=",")
     np.savetxt(save_address+"R_signal_data.csv", frames_nparray_R, fmt="%d",delimiter=",")
-    suonare.make_wav_file(py_audio,
-                          save_address+sound_file_name_date_L_wav,
-                          1,
-                          FORMAT,
-                          SAMPLERATE,
-                          frames_L
-                         )
-    suonare.make_wav_file(py_audio,
-                          save_address+sound_file_name_date_R_wav,
-                          1,
-                          FORMAT,
-                          SAMPLERATE,
-                          frames_R
-                         )
+    #suonare.make_wav_file(py_audio,
+    #                      save_address+sound_file_name_date_L_wav,
+    #                      1,
+    #                      FORMAT,
+    #                      SAMPLERATE,
+    #                      frames_L
+    #                     )
+    #suonare.make_wav_file(py_audio,
+    #                      save_address+sound_file_name_date_R_wav,
+    #                      1,
+    #                      FORMAT,
+    #                      SAMPLERATE,
+    #                      frames_R
+    #                     )
+    
     #plot the L and R figure
+    #setting plot
+    #font
+    #plt.rcParams["font.size"] = 14
+    #plt.rcParams["font.family"] = "Time New Roman"
+
+    # scale
+    #plt.rcParams["xtick.direction"] = "in"
+    #plt.rcParams["ytick.direction"] = "in"
+
+    #fig = plt.figure()
+    #ax1 = fig.add_subplot(211)
+    #ax2 = fig.add_subplot(212)
+    # setting axis
+    #ax1.set_xlabel("Time [s]")
+    #ax1.set_ylabel("Amplitude")
+    #ax2.set_xlabel("Time [s]")
+    #ax2.set_ylabel("Amplitude")
+    #plot(x_axis,y_axis,label)
+    #ax1.plot(t,frames_nparray_L)
+    #ax2.plot(t,frames_nparray_R)
+
+    #fig.tight_layout()
+    #The smallest codes to plot
     plt.subplot(211)
     plt.plot(frames_nparray_L)
     plt.subplot(212)
@@ -208,3 +250,4 @@ else:
 
 
 print("お疲れ様！")
+

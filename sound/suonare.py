@@ -91,3 +91,26 @@ def make_wav_file(py_audio,sound_file_name_date,CHANNELS,FORMAT,SAMPLERATE,frame
     wf.close()
 
 
+# array is list
+def bytes_L_select(array):
+    i=0
+    for i in range(len(array)):
+        if i%2==0:
+            continue
+        else:
+            array[i] = b'\x00'
+    
+    return array
+
+
+def bytes_R_select(array):
+    i=0
+    for i in range(len(array)):
+        if i%2==0:
+            array[i] = b'\x00'
+        else:
+            continue
+
+    return array
+
+
