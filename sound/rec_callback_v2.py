@@ -182,7 +182,7 @@ print("frames_R", len(frames_R))
 #print("frames_R:", frames_R)
 frames_nparray = np.frombuffer(frames_bin,dtype='int16')
 print("frames_nparray:",str(type(frames_nparray)))
-print(frames_nparray)
+#print(frames_nparray)
 print("len(frames_nparray):", len(frames_nparray))
 print(type(frames_nparray[0]))
 
