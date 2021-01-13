@@ -41,18 +41,53 @@ SAMPLERATE = 48000
 
 print('time',(len(frames)/CHANNELS/SAMPLERATE))
 print('len(frames)/SAMPLERATE',(len(frames)/SAMPLERATE))
-fig = plt.figure()
-ax1 = fig.add_subplot(111)
-t = np.arange(start=0, stop=(len(frames)/SAMPLERATE),step=(1/SAMPLERATE))
-t = t[:-1]
-#setting axis
-ax1.set_xlabel("Time [s]")
-ax1.set_ylabel("Amplitude")
-ax1.set_xlim([0,5])
+time = len(frames)/CHANNELS/SAMPLERATE
 
-ax1.plot(t,frames)
+# scale
+plt.rcParams["xtick.direction"] = "in"
+plt.rcParams["ytick.direction"] = "in"
+
+if CHANNELS == 1:
+    fig = plt.figure()
+    ax1 = fig.add_subplot(111)
+    t = np.arange(start=0, stop=time,step=(1/SAMPLERATE))
+    t = t[:-1]
+    #setting axis
+    ax1.set_xlabel("Time [s]")
+    ax1.set_ylabel("Amplitude")
+    ax1.set_xlim([0,time+0.5])
+
+    ax1.plot(t,frames)
+################################################
+else:
+    frames_L = frames[::2]
+    frames_R = frames[1::2]
+    fig = plt.figure()
+    ax1 = fig.add_subplot(211)
+    ax2 = fig.add_subplot(212)
+    t = np.arange(start=0, stop=time,step=(1/SAMPLERATE))
+    t = t[:-1]
+    #setting axis
+    ax1.set_xlabel("Time [s]")
+    ax1.set_ylabel("Amplitude")
+    ax1.set_xlim([0,time+0.5])
+
+    ax2.set_xlabel("Time [s]")
+    ax2.set_ylabel("Amplitude")
+    ax2.set_xlim([0,time+0.5])
+    
+    ax1.plot(t,frames_L)
+    ax2.plot(t,frames_R)
+
 fig.tight_layout()
 plt.show()
+
+#okflag = input("保存していい？ y or n >> ")
+#if okflag=="y" or okflag=="":
+#else:
+#
+#dirpath = os.path.dirname(select_filename)
+#print(dirpath)
 #######################################################################
 #ax1 = fig.add_subplot(211)
 #ax2 = fig.add_subplot(212)
