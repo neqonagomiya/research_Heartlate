@@ -45,7 +45,14 @@ fig = plt.figure()
 ax1 = fig.add_subplot(111)
 t = np.arange(start=0, stop=(len(frames)/SAMPLERATE),step=(1/SAMPLERATE))
 t = t[:-1]
+#setting axis
+ax1.set_xlabel("Time [s]")
+ax1.set_ylabel("Amplitude")
+ax1.set_xlim([0,5])
+
 ax1.plot(t,frames)
+fig.tight_layout()
+plt.show()
 #######################################################################
 #ax1 = fig.add_subplot(211)
 #ax2 = fig.add_subplot(212)
@@ -58,6 +65,6 @@ ax1.plot(t,frames)
 #plot(x_axis,y_axis,label)
 #ax1.plot(t,frames_nparray_L)
 #ax2.plot(t,frames_nparray_R)
+#fig.tight_layout()
+#plt.show()
 #########################################################################
-fig.tight_layout()
-plt.show()
