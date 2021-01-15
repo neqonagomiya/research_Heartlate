@@ -55,7 +55,7 @@ if CHANNELS == 1:
     #setting axis
     ax1.set_xlabel("Time [s]")
     ax1.set_ylabel("Amplitude")
-    ax1.set_xlim([0,time+0.5])
+    ax1.set_xlim([0,time+0.1])
 
     ax1.plot(t,frames)
 ################################################
@@ -66,18 +66,34 @@ else:
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
     t = np.arange(start=0, stop=time,step=(1/SAMPLERATE))
-    t = t[:-1]
+    #t = t[:-1]
     #setting axis
     ax1.set_xlabel("Time [s]")
     ax1.set_ylabel("Amplitude")
-    ax1.set_xlim([0,time+0.5])
+    ax1.set_xlim([0,time+0.1])
 
     ax2.set_xlabel("Time [s]")
     ax2.set_ylabel("Amplitude")
-    ax2.set_xlim([0,time+0.5])
+    ax2.set_xlim([0,time+0.1])
     
-    ax1.plot(t,frames_L)
+    ax1.plot(t,frames_L,'r')
     ax2.plot(t,frames_R)
+
+
+#######################################################################
+#FFT
+########################################################################
+# 高速フーリエ変換(FFT)
+#fft_frames = np.fft.fft(frames_nparray)
+
+# FFT結果（複素数）を絶対値に変換
+#amp_fft_frames =np.abs(fft_frames/(len(frames_nparray)/2))
+#print("fft",len(amp_fft_frames))
+#plt.yscale('log')
+
+# グラフ表示（データ数の半分の周期を表示）
+#plt.plot(amp_fft_frames[:int(len(frames_nparray)/2)+1])
+#plt.show()
 
 fig.tight_layout()
 plt.show()

@@ -16,7 +16,7 @@ f2 = 30
 #t = np.arange(0.N*dt,dt)
 
 # filter_LPF = signal.firwin(numtaps=1000,cutoff=f2,fs=sample_freq,pass_zero=False)
-filter_LPF = signal.firwin(numtaps=1000,cutoff=[0.3,f2],fs=sample_freq,pass_zero=False)
+filter_LPF = signal.firwin(numtaps=1000,cutoff=[f1,f2],fs=sample_freq,pass_zero=False)
 
 y1 = signal.lfilter(filter_LPF,1,df)
 FFT = np.fft.fft(y1)

@@ -242,12 +242,24 @@ if CHANNELS == 2:
     plt.plot(frames_nparray_L)
     plt.subplot(212)
     plt.plot(frames_nparray_R)
+    plt.savefig(save_address+'original_signal_data.png')
     plt.show()
 else:
     np.savetxt(save_address+"original_signal_data.csv",frames_nparray,fmt="%d",delimiter=",")
     plt.plot(frames_nparray)
     plt.show()
 
+# 高速フーリエ変換(FFT)
+fft_frames = np.fft.fft(frames_nparray)
+
+# FFT結果（複素数）を絶対値に変換
+amp_fft_frames =np.abs(fft_frames/(len(frames_nparray)/2))
+print("fft",len(amp_fft_frames))
+plt.yscale('log')
+
+# グラフ表示（データ数の半分の周期を表示）
+plt.plot(amp_fft_frames[0:int(len(frames_nparray)/2)+1])
+plt.show()
 
 print("お疲れ様！")
 
