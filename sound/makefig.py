@@ -52,6 +52,10 @@ plt.rcParams["xtick.major.size"] = 5
 plt.rcParams["ytick.major.size"] = 5                
 plt.rcParams["xtick.minor.size"] = 2.5                 
 plt.rcParams["ytick.minor.size"] = 2.5               
+plt.rcParams['figure.figsize'] = 10,4.5
+#10,5    0.4
+#plt.rcParams["figure.figsize"] = 12,6
+#plt.rcParams["figure.dpi"] 
 
 if CHANNELS == 1:
     frames_abs = np.abs(frames)
@@ -176,6 +180,9 @@ else:
     t = np.arange(start=0, stop=time,step=(1/SAMPLERATE))
     t = t[:-1]
     
+    ########################################################################################
+    #save params
+    ########################################################################################
     with open(os.path.dirname(select_filename)+"param.txt","w") as f:
         print("param",file=f)
         print("CHANNNEL: "+str(CHANNELS),file=f)
@@ -214,18 +221,19 @@ else:
     ax1.set_ylabel("Amplitude")
     ax1.set_xlim([0,3.0])
     ax1.set_ylim([-1.1,1.1])
-    ax1.set_title('(a) ECG',y=-0.45)
+    ax1.set_title('(a) ECG',y=-0.46)
    
     ax2.set_xlabel("Time [s]")
     ax2.set_ylabel("Amplitude")
     ax2.set_xlim([0,3.0])
     ax2.set_ylim([-1.1,1.1])
-    ax2.set_title('(b) Mic output',y=-0.45)
+    ax2.set_title('(b) Mic output',y=-0.46)
 
     ##########################################################################################
-    ax1.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#333333',linestyle='dashed',linewidth=2)    
-    ax1.vlines(min2_loc_L/SAMPLERATE,-1.1,1.1,colors='#333333',linestyle='dashed',linewidth=2)
-    ax2.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#333333',linestyle='dashed',linewidth=2)
+    #ax1.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)    
+    #ax1.vlines(min2_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    #ax2.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    #ax2.vlines(min2_loc_R/SAMPLERATE,-1.1,1.1,colors="#000000",linestyle='dashed',linewidth=2)
     ##########################################################################################
 
     ax1.plot(t,frames_L_plot,color='#ff4500')
@@ -246,17 +254,17 @@ else:
     ax3.set_ylabel("Amplitude")
     ax3.set_xlim([0.5,1.0])
     ax3.set_ylim([-1.1,1.1])
-    ax3.set_title('(a) ECG',y=-0.45)
+    ax3.set_title('(a) ECG',y=-0.46)
 
     ax4.set_xlabel("Time [s]")
     ax4.set_ylabel("Amplitude")
     ax4.set_xlim([0.5,1.0])
     ax4.set_ylim([-1.1,1.1])
-    ax4.set_title('(b) Mic output',y=-0.45)
+    ax4.set_title('(b) Mic output',y=-0.46)
 
     #########################################################################################
-    # ax3.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#333333',linestyle='dashed',linewidth=2)
-    # ax4.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#333333',linestyle='dashed',linewidth=2)
+    #ax3.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    #ax4.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
     ##########################################################################################
 
     ax3.plot(t,frames_L_plot,color='#ff4500')
