@@ -144,7 +144,23 @@ else:
 
     print("min2_loc_L: ", min2_loc_L)
     print("min2_loc_L_numpy: ", np.argmin(frames_L_plot[48000:96000]))
-    print("sample difference:",(min2_loc_L)-(min_loc_L))
+    print("sample difference L :",(min2_loc_L)-(min_loc_L))
+    ########################################################################################
+    # mic 間隔
+    ########################################################################################
+    min2_val_R = 0
+    com_val_R = 0
+    for i in range(48000,96000):
+        com_val_R = frames_R_plot[i]
+        if min2_val_R > com_val_R:
+            min2_val_R = com_val_R
+            min2_loc_R = i
+        else:
+            continue
+
+    print("min2_loc_R: ", min2_loc_R)
+    print("min2_loc_R_numpy: ", np.argmin(frames_R_plot[48000:96000]))
+    print("sample difference R:",(min2_loc_R)-(min_loc_R))
     ########################################################################################
 
     print(frames)
@@ -166,9 +182,16 @@ else:
         print("min_loc_L:" + str(min_loc_L),file=f)
         print("min_loc_L numpy:"+str(np.argmin(frames_L_plot[0:38400])),file=f)
         print("min_val_L: "+str(min_val_L),file=f)
+        print("min2_loc_L: ", min2_loc_L)
+        print("min2_loc_L_numpy: ", np.argmin(frames_L_plot[48000:96000]))
+        print("sample difference L :",(min2_loc_L)-(min_loc_L))
+
         print("min_loc_R: "+str(min_loc_R),file=f)
         print("min_loc_R numpy:"+str(np.argmin(frames_R_plot[0:38400])),file=f)
         print("min_val_R:"+ str(min_val_R),file=f)
+        print("min2_loc_R: ", min2_loc_R)
+        print("min2_loc_R_numpy: ", np.argmin(frames_R_plot[48000:96000]))
+        print("sample difference R:",(min2_loc_R)-(min_loc_R))
         #print(frames)
         print("frames type: "+str(type(frames)),file=f)
         print('size: '+str(len(frames)),file=f)
