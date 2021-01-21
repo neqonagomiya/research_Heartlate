@@ -189,16 +189,16 @@ else:
         print("min_loc_L:" + str(min_loc_L),file=f)
         print("min_loc_L numpy:"+str(np.argmin(frames_L_plot[0:38400])),file=f)
         print("min_val_L: "+str(min_val_L),file=f)
-        print("min2_loc_L: ", min2_loc_L)
-        print("min2_loc_L_numpy: ", np.argmin(frames_L_plot[48000:96000]))
-        print("sample difference L :",(min2_loc_L)-(min_loc_L))
+        print("min2_loc_L: " +str(min2_loc_L), file=f)
+        print("min2_loc_L_numpy: "+str(np.argmin(frames_L_plot[48000:96000])),file=f)
+        print("sample difference L :"+str((min2_loc_L)-(min_loc_L)),file=f)
 
         print("min_loc_R: "+str(min_loc_R),file=f)
         print("min_loc_R numpy:"+str(np.argmin(frames_R_plot[0:38400])),file=f)
         print("min_val_R:"+ str(min_val_R),file=f)
-        print("min2_loc_R: ", min2_loc_R)
-        print("min2_loc_R_numpy: ", np.argmin(frames_R_plot[48000:96000]))
-        print("sample difference R:",(min2_loc_R)-(min_loc_R))
+        print("min2_loc_R: "+str(min2_loc_R),file=f)
+        print("min2_loc_R_numpy: "+str(np.argmin(frames_R_plot[48000:96000])),file=f)
+        print("sample difference R:"+str((min2_loc_R)-(min_loc_R)),file=f)
         #print(frames)
         print("frames type: "+str(type(frames)),file=f)
         print('size: '+str(len(frames)),file=f)
@@ -207,7 +207,7 @@ else:
         print('time: '+str((len(frames)/CHANNELS/SAMPLERATE)), file=f)
         print('len(frames)/SAMPLERATE: '+str((len(frames)/SAMPLERATE)),file=f)
         print('timelen(frames)/CHANNELS/SAMPLERATE: '+ str(time), file=f)
-    
+        print('L_R_difference :'+str((min_loc_R)-(min_loc_L)),file=f)
     
     fig1 = plt.figure()
     ax1 = fig1.add_subplot(211)
@@ -219,21 +219,21 @@ else:
     
     ax1.set_xlabel("Time [s]")
     ax1.set_ylabel("Amplitude")
-    ax1.set_xlim([0,3.0])
+    ax1.set_xlim([0,2.0])
     ax1.set_ylim([-1.1,1.1])
     ax1.set_title('(a) ECG',y=-0.46)
    
     ax2.set_xlabel("Time [s]")
     ax2.set_ylabel("Amplitude")
-    ax2.set_xlim([0,3.0])
+    ax2.set_xlim([0,2.0])
     ax2.set_ylim([-1.1,1.1])
     ax2.set_title('(b) Mic output',y=-0.46)
 
     ##########################################################################################
-    #ax1.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)    
-    #ax1.vlines(min2_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
-    #ax2.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
-    #ax2.vlines(min2_loc_R/SAMPLERATE,-1.1,1.1,colors="#000000",linestyle='dashed',linewidth=2)
+    ax1.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)    
+    ax1.vlines(min2_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    ax2.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    ax2.vlines(min2_loc_R/SAMPLERATE,-1.1,1.1,colors="#000000",linestyle='dashed',linewidth=2)
     ##########################################################################################
 
     ax1.plot(t,frames_L_plot,color='#ff4500')
@@ -263,8 +263,8 @@ else:
     ax4.set_title('(b) Mic output',y=-0.46)
 
     #########################################################################################
-    #ax3.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
-    #ax4.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    ax3.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
+    ax4.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
     ##########################################################################################
 
     ax3.plot(t,frames_L_plot,color='#ff4500')
