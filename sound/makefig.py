@@ -233,7 +233,7 @@ else:
     ax1.vlines(min_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)    
     ax1.vlines(min2_loc_L/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
     ax2.vlines(min_loc_R/SAMPLERATE,-1.1,1.1,colors='#000000',linestyle='dashed',linewidth=2)
-    ax2.vlines(min2_loc_R/SAMPLERATE,-1.1,1.1,colors="#000000",linestyle='dashed',linewidth=2)
+    #ax2.vlines(min2_loc_R/SAMPLERATE,-1.1,1.1,colors="#000000",linestyle='dashed',linewidth=2)
     ##########################################################################################
 
     ax1.plot(t,frames_L_plot,color='#ff4500')
